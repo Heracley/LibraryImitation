@@ -5,7 +5,10 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-14283728"/>
+      <foreground color="-5708378"/>
+    </properties>
     <border type="none"/>
     <children>
       <scrollpane id="e0752">
@@ -20,6 +23,8 @@
           <component id="e4032" class="javax.swing.JTree" binding="mainTree">
             <constraints/>
             <properties>
+              <font name="JetBrains Mono" size="12"/>
+              <foreground color="-5708378"/>
               <rootVisible value="true"/>
               <showsRootHandles value="false"/>
             </properties>
