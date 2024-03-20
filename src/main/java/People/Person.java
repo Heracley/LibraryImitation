@@ -12,7 +12,7 @@ public abstract class Person {
     }
 
     public String getFullName() {
-        return name + " " + patronymic + " " + lastname;
+        return lastname + " " + name + " " + patronymic;
     }
 
     @Override

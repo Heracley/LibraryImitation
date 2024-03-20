@@ -24,6 +24,7 @@ public class PersonGenerator {
             studentList.add(student);
         }
 
+        studentList.sort((p1, p2) -> p1.getFullName().compareToIgnoreCase(p2.getFullName()));
         return studentList;
     }
 
@@ -32,7 +33,7 @@ public class PersonGenerator {
 
         Chair chair = new Chair(chairNumber, "chairName");
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numTutor; i++) {
             String name = faker.name().firstName();
             String patronymic = faker.name().lastName();
             String lastname = faker.name().lastName();
@@ -40,6 +41,7 @@ public class PersonGenerator {
             tutorList.add(tutor);
         }
 
+        tutorList.sort((p1, p2) -> p1.getFullName().compareToIgnoreCase(p2.getFullName()));
         return tutorList;
     }
 }
