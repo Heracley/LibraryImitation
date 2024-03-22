@@ -21,6 +21,6 @@ public abstract class FictionLiterature implements Literature {
 
     @Override
     public String toString() {
-        return name + ". " + author + ". " + genre;
+        return name + ".\n" + author + ".\n" + genre;
     }
 }

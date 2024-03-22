@@ -16,7 +16,11 @@ public class Library {
         bookList.add(book);
     }
 
-    public LibraryPass createPass(Person person) {
+    public LibraryPass getPass(Person person) {
+        if (passMap.containsKey(person)) {
+            return passMap.get(person);
+        }
+
         LibraryPass pass = new LibraryPass();
         passMap.put(person, pass);
         return pass;

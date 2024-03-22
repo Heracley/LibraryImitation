@@ -13,4 +13,9 @@ public class FictionLiteratureRU extends FictionLiterature {
     public String getPeriod() {
         return period.getDescription();
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + ".\n" + period.getDescription();
+    }
 }

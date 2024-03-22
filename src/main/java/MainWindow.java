@@ -15,10 +15,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 import static Library.BookGenerator.generateLiterature;
 
@@ -30,6 +27,7 @@ public class MainWindow extends JFrame {
     private final Library library = new Library();
     private ArrayList<Student> students = new ArrayList<>();
     private ArrayList<Tutor> tutors = new ArrayList<>();
+    private final Random random = new Random();
 
     public MainWindow() {
         setContentPane(panel);
@@ -52,8 +50,8 @@ public class MainWindow extends JFrame {
         DefaultMutableTreeNode studentNode = new DefaultMutableTreeNode("Студенты");
         DefaultMutableTreeNode tutorNode = new DefaultMutableTreeNode("Преподаватели");
 
-
         // Генерируем пользователей и добавляем в дерево
+        generatePeople(30, 10);
         for (Student student : students) {
             DefaultMutableTreeNode studentTreeNode = new DefaultMutableTreeNode(student);
             studentNode.add(studentTreeNode);
@@ -64,10 +62,10 @@ public class MainWindow extends JFrame {
         }
 
         // Генерируем книжки к каждому пользователю
-        ArrayList<Person> combinedList = new ArrayList<>();
-        combinedList.addAll(students);
-        combinedList.addAll(tutors);
-        generateBooks(combinedList);
+        ArrayList<Person> userList = new ArrayList<>();
+        userList.addAll(students);
+        userList.addAll(tutors);
+        generateBooks(userList);
 
         root.add(studentNode);
         root.add(tutorNode);
@@ -80,11 +78,12 @@ public class MainWindow extends JFrame {
                 "Кафедра физических проблем материаловедения");
     }
 
-    private void getRandomDate() {
+    private Date getRandomDate() {
         Random random = new Random();
         int daysInThePast = random.nextInt(1096); // 3 years in days
         LocalDate randomDate = LocalDate.now().minusDays(daysInThePast);
         Date dateInThePast = Date.from(randomDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return dateInThePast;
     }
 
     private void generateBooks(ArrayList<Person> users) {
@@ -95,10 +94,20 @@ public class MainWindow extends JFrame {
         }
 
         for (Person person : users) {
+            LibraryPass pass = library.getPass(person);
+            HashMap<Literature, Date> takenBooks = pass.getTakenBooks();
+
             int numBooksToTake = random.nextInt(8) + 3; // Генерируем число от 3 до 10
-            LibraryPass pass = library.createPass(person);
-            pass.getTakenBooks();
-            // pass.takeBook(book);
+            for (int i = 0; i < numBooksToTake; i++) {
+                // Получаем случайную книгу из списка, которая еще не была взята
+                Literature randomBook;
+                do {
+                    randomBook = books.get(random.nextInt(books.size()));
+                } while (takenBooks.containsKey(randomBook));
+
+                // Взять книгу
+                pass.takeBook(randomBook, getRandomDate());
+            }
         }
     }
 
@@ -136,7 +145,7 @@ public class MainWindow extends JFrame {
                 int currentY = (int) currentLocation.getY();
 
                 // Создаем новое окно и позиционируем его справа от текущего окна
-                chosenWindow[0] = new ChosenWindow((Person) selectedNode.getUserObject());
+                chosenWindow[0] = new ChosenWindow((Person) selectedNode.getUserObject(), library);
                 chosenWindow[0].setLocation(currentX + getWidth(), currentY);
                 chosenWindow[0].setVisible(true);
                 chosenWindow[0].addWindowListener(new WindowAdapter() {

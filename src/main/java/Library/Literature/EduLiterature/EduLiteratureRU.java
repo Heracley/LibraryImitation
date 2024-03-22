@@ -14,6 +14,6 @@ public class EduLiteratureRU extends EduLiterature {
 
     @Override
     public String toString() {
-        return kind + ". " + getName() + ". " + getAuthor() + ". " + getMajor();
+        return kind + ".\n" + super.toString();
     }
 }

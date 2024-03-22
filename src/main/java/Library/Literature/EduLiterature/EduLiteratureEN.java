@@ -20,7 +20,7 @@ public class EduLiteratureEN extends EduLiterature {
 
     @Override
     public String toString() {
-        return grade + ". " + getName() + ". " + getAuthor() + ". " + getMajor();
+        return grade + ".\n" + super.toString();
     }
 }
 
