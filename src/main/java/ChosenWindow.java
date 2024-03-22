@@ -9,7 +9,7 @@ public class ChosenWindow extends JFrame {
 
     public ChosenWindow(Person person) {
         setContentPane(panel1);
-        setTitle("Библиотечный учёт 1");
+        setTitle("Читательский билет");
         setSize(300, 300);
 
         if (person instanceof Student student) {

@@ -11,12 +11,8 @@ public abstract class Person {
         this.lastname = lastname;
     }
 
-    public String getFullName() {
-        return lastname + " " + name + " " + patronymic;
-    }
+    public String getFullName() { return lastname + " " + name + " " + patronymic; }
 
     @Override
-    public String toString() {
-        return getFullName();
-    }
+    public String toString() { return getFullName(); }
 }

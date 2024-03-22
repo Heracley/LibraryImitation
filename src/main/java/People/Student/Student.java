@@ -12,10 +12,6 @@ public class Student extends Person {
         this.studentID = studentID;
     }
 
-    public String getGroup() {
-        return group;
-    }
-    public String getStudentID() {
-        return studentID;
-    }
+    public String getGroup() { return group; }
+    public String getStudentID() { return studentID; }
 }
