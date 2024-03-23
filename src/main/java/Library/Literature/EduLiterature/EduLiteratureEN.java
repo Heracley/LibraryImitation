@@ -1,7 +1,9 @@
 package Library.Literature.EduLiterature;
 
 
-public class EduLiteratureEN extends EduLiterature {
+import Library.Literature.ENLiterature;
+
+public class EduLiteratureEN extends EduLiterature implements ENLiterature {
     private ENGrade grade;
     private String university;
 
@@ -19,8 +21,8 @@ public class EduLiteratureEN extends EduLiterature {
     }
 
     @Override
-    public String toString() {
-        return grade + ".\n" + super.toString();
+    public String getLang() {
+        return lang;
     }
 }
 

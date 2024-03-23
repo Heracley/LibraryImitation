@@ -1,8 +1,8 @@
 package Library.Literature.FictionLiterature;
 
-import Library.Literature.FictionLiterature.FictionLiterature;
+import Library.Literature.ENLiterature;
 
-public class FictionLiteratureEN extends FictionLiterature {
+public class FictionLiteratureEN extends FictionLiterature implements ENLiterature {
     private String country;
 
     public FictionLiteratureEN(String name, String author, String genre, String country) {
@@ -15,7 +15,7 @@ public class FictionLiteratureEN extends FictionLiterature {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ".\n" + country;
+    public String getLang() {
+        return lang;
     }
 }

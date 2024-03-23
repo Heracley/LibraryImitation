@@ -14,6 +14,10 @@ public class LibraryPass {
         taken.put(book, Objects.requireNonNullElseGet(date, Date::new));
     }
 
+    public void returnBook(Literature book) {
+        taken.remove(book);
+    }
+
     public HashMap<Literature, Date> getTakenBooks() {
         return new HashMap<>(taken);
     }

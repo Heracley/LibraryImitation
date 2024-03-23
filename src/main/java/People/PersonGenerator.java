@@ -31,7 +31,7 @@ public class PersonGenerator {
     public static ArrayList<Tutor> generateTutor(int numTutor, int chairNumber, String chairName) {
         ArrayList<Tutor> tutorList = new ArrayList<>();
 
-        Chair chair = new Chair(chairNumber, "chairName");
+        Chair chair = new Chair(chairNumber, chairName);
 
         for (int i = 0; i < numTutor; i++) {
             String name = faker.name().firstName();

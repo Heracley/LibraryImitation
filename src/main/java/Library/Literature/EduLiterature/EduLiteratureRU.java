@@ -1,7 +1,10 @@
 package Library.Literature.EduLiterature;
 
-public class EduLiteratureRU extends EduLiterature {
+import Library.Literature.RULiterature;
+
+public class EduLiteratureRU extends EduLiterature implements RULiterature {
     private RUKind kind;
+    private final String lang = "RU";
 
     public EduLiteratureRU(String name, String author, String major, String kind) {
         super(name, author, major);
@@ -13,7 +16,7 @@ public class EduLiteratureRU extends EduLiterature {
     }
 
     @Override
-    public String toString() {
-        return kind + ".\n" + super.toString();
+    public String getLang() {
+        return lang;
     }
 }

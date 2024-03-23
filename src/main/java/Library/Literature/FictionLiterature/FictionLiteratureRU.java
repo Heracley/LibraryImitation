@@ -1,8 +1,8 @@
 package Library.Literature.FictionLiterature;
 
-import Library.Literature.EduLiterature.EduLiterature;
+import Library.Literature.RULiterature;
 
-public class FictionLiteratureRU extends FictionLiterature {
+public class FictionLiteratureRU extends FictionLiterature implements RULiterature {
     private RUPeriod period;
 
     public FictionLiteratureRU(String name, String author, String genre, String period) {
@@ -15,7 +15,7 @@ public class FictionLiteratureRU extends FictionLiterature {
     }
 
     @Override
-    public String toString(){
-        return super.toString() + ".\n" + period.getDescription();
+    public String getLang() {
+        return lang;
     }
 }

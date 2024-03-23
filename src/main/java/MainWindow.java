@@ -118,14 +118,10 @@ public class MainWindow extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                if (e.getClickCount() != 2) {
-                    return;
-                }
+                if (e.getClickCount() != 2) { return; }
 
                 TreePath selectionPath = mainTree.getSelectionPath();
-                if (selectionPath == null) {
-                    return;
-                }
+                if (selectionPath == null) { return; }
 
                 DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) selectionPath.getLastPathComponent();
                 String nodeText = selectedNode.getUserObject().toString();

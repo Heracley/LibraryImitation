@@ -10,6 +10,6 @@ public class Chair {
     }
 
     public String getName() {
-        return name + " (" + number + ")";
+        return name + " (№ " + number + ")";
     }
 }

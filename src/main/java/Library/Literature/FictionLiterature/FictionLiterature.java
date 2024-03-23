@@ -2,25 +2,16 @@ package Library.Literature.FictionLiterature;
 
 import Library.Literature.Literature;
 
-public abstract class FictionLiterature implements Literature {
-    private String name;
-    private String author;
+public abstract class FictionLiterature extends Literature {
     private String genre;
+    private final String style = "Художественный";
 
     public FictionLiterature(String name, String author, String genre) {
-        this.name = name;
-        this.author = author;
+        super(name, author);
         this.genre = genre;
     }
 
-    public String getName() { return name; }
-
-    public String getAuthor() { return author; }
-
     public String getGenre() { return genre; }
 
-    @Override
-    public String toString() {
-        return name + ".\n" + author + ".\n" + genre;
-    }
+    public String getStyle() { return style; }
 }
