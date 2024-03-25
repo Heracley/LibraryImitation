@@ -1,12 +1,6 @@
 import College.College;
 import Library.Library;
-import Library.LibraryPass;
-
-import Library.Literature.Literature;
 import People.Person;
-import People.PersonGenerator;
-import People.Student.Student;
-import People.Tutor.Tutor;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -14,22 +8,14 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
-
-import static Library.BookGenerator.generateLiterature;
 
 
 public class MainWindow extends JFrame {
     private JPanel panel;
     private JTree mainTree;
-    final ChosenWindow[] chosenWindow = {null}; // Используем массив для обхода требования final
-    private final College college = new College();
-    private final Library library = new Library(college);
-    private ArrayList<Student> students = new ArrayList<>();
-    private ArrayList<Tutor> tutors = new ArrayList<>();
-
+    private final ChosenWindow[] chosenWindow = {null};
+    private final College college = new College(true);
+    private final Library library = new Library(college, true);
 
     public MainWindow() {
         setContentPane(panel);

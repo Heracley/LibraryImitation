@@ -13,11 +13,15 @@ import static Library.BookGenerator.generateLiterature;
 public class Library {
     private final List<Literature> bookList = new ArrayList<>();
     private final Map<Person, LibraryPass> passMap = new HashMap<>();
-    private final Random random = new Random();
+    private College college;
 
-    public Library(College college) {
-        generateBooks(30, 30, 30, 30);
-        addRandomTaken(college.getUserList());
+    public Library(College college, boolean isDummy) {
+        this.college = college;
+
+        if (isDummy) {
+            generateBooks(30, 30, 30, 30);
+            addRandomTaken(this.college.getUserList());
+        }
     }
 
     public ArrayList<Literature> getBook() { return new ArrayList<>(bookList); }
@@ -44,6 +48,8 @@ public class Library {
     }
 
     private void addRandomTaken(ArrayList<Person> userList) {
+        Random random = new Random();
+
         for (Person person : userList) {
             LibraryPass pass = getPass(person);
             HashMap<Literature, Date> takenBooks = pass.getTakenBooks();
