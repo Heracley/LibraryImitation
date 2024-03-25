@@ -1,3 +1,4 @@
+import College.College;
 import Library.Library;
 import Library.LibraryPass;
 
@@ -24,10 +25,11 @@ public class MainWindow extends JFrame {
     private JPanel panel;
     private JTree mainTree;
     final ChosenWindow[] chosenWindow = {null}; // Используем массив для обхода требования final
-    private final Library library = new Library();
+    private final College college = new College();
+    private final Library library = new Library(college);
     private ArrayList<Student> students = new ArrayList<>();
     private ArrayList<Tutor> tutors = new ArrayList<>();
-    private final Random random = new Random();
+
 
     public MainWindow() {
         setContentPane(panel);
@@ -50,65 +52,22 @@ public class MainWindow extends JFrame {
         DefaultMutableTreeNode studentNode = new DefaultMutableTreeNode("Студенты");
         DefaultMutableTreeNode tutorNode = new DefaultMutableTreeNode("Преподаватели");
 
-        // Генерируем пользователей и добавляем в дерево
-        generatePeople(30, 10);
-        for (Student student : students) {
-            DefaultMutableTreeNode studentTreeNode = new DefaultMutableTreeNode(student);
-            studentNode.add(studentTreeNode);
+        // Добавляем пользователей
+        for (Person person : college.getUserList()) {
+            switch (person.getRole()) {
+                case "st" -> {
+                    DefaultMutableTreeNode studentTreeNode = new DefaultMutableTreeNode(person);
+                    studentNode.add(studentTreeNode);
+                }
+                case "tt" -> {
+                    DefaultMutableTreeNode tutorTreeNode = new DefaultMutableTreeNode(person);
+                    tutorNode.add(tutorTreeNode);
+                }
+            }
         }
-        for (Tutor tutor : tutors) {
-            DefaultMutableTreeNode tutorTreeNode = new DefaultMutableTreeNode(tutor);
-            tutorNode.add(tutorTreeNode);
-        }
-
-        // Генерируем книжки к каждому пользователю
-        ArrayList<Person> userList = new ArrayList<>();
-        userList.addAll(students);
-        userList.addAll(tutors);
-        generateBooks(userList);
-
         root.add(studentNode);
         root.add(tutorNode);
         treeModel.setRoot(root);
-    }
-
-    private void generatePeople(int stNum, int ttNum) {
-        students = PersonGenerator.generateStudent(stNum);
-        tutors = PersonGenerator.generateTutor(ttNum, 9,
-                "Кафедра физических проблем материаловедения");
-    }
-
-    private Date getRandomDate() {
-        Random random = new Random();
-        int daysInThePast = random.nextInt(1096); // 3 years in days
-        LocalDate randomDate = LocalDate.now().minusDays(daysInThePast);
-        Date dateInThePast = Date.from(randomDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        return dateInThePast;
-    }
-
-    private void generateBooks(ArrayList<Person> users) {
-        ArrayList<Literature> books = generateLiterature(30, 30, 30, 30);
-        Collections.shuffle(books);
-        for (Literature book : books) {
-            library.addBook(book);
-        }
-
-        for (Person person : users) {
-            LibraryPass pass = library.getPass(person);
-            HashMap<Literature, Date> takenBooks = pass.getTakenBooks();
-
-            int numBooksToTake = random.nextInt(8) + 3; // Генерируем число от 3 до 10
-            for (int i = 0; i < numBooksToTake; i++) {
-                // Получаем случайную книгу из списка, которая еще не была взята
-                Literature randomBook;
-                do {
-                    randomBook = books.get(random.nextInt(books.size()));
-                } while (takenBooks.containsKey(randomBook));
-
-                // Взять книгу
-                pass.takeBook(randomBook, getRandomDate());
-            }
-        }
     }
 
     private void addListeners() {
