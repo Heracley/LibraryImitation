@@ -31,4 +31,4 @@
 
 ## Схема проекта (UML)
 
-![UML Diagram](files/UML.drawio.pdf)
+![UML Diagram](files/schema.png)
